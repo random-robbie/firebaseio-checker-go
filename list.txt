@@ -1,1 +1,1 @@
-https://abr-official-free.firebaseio.com/.json
+abr-official-free.firebaseio.com

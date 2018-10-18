@@ -7,6 +7,7 @@ Requirements
 
 ```
 go get github.com/logrusorgru/aurora
+go get github.com/remeh/sizedwaitgroup
 ```
 
 Build

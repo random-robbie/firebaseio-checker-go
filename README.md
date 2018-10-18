@@ -1,5 +1,6 @@
 # firebaseio-checker-go
-Firebase url checker in go
+
+Firebase url checker in go it will dump the contents of the database to a json file for you.
 
 Requirements
 ---

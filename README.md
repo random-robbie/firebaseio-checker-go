@@ -14,6 +14,6 @@ How to
 
 Put all your firebase urls in a file called list.txt with out https://
 
-./firebaseio-checker
+./firebase-checker
 
 it will output everything to the cfg folder with the database name .json and it's contents for easy grepping.

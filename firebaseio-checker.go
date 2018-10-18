@@ -9,12 +9,14 @@ import (
 	"crypto/tls"
 	"flag"
 	"fmt"
-	"github.com/logrusorgru/aurora"
 	"io"
 	"log"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/logrusorgru/aurora"
+	"github.com/remeh/sizedwaitgroup"
 )
 
 var (
@@ -30,7 +32,9 @@ func init() {
 	au = aurora.NewAurora(*colors)
 }
 
-func grab_url(URL, output, filepathurl string) {
+func grabURL(URL string, output string, filepathurl string, swg *sizedwaitgroup.SizedWaitGroup) {
+
+	defer swg.Done()
 
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
@@ -88,7 +92,7 @@ func grab_url(URL, output, filepathurl string) {
 }
 
 func main() {
-
+	swg := sizedwaitgroup.New(10)
 	fmt.Println(au.Blue("[*] Firebase IO Checker - By @random_robbie [*]"))
 	file, err := os.Open(fileofurls)
 	if err != nil {
@@ -98,8 +102,10 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
+		swg.Add()
 		URL := strings.TrimSpace(scanner.Text())
-		grab_url(URL, outputfile, filepathurl)
+		go grabURL(URL, outputfile, filepathurl, &swg)
+		swg.Wait()
 	}
 
 	if err := scanner.Err(); err != nil {

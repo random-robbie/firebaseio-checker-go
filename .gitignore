@@ -1,0 +1,33 @@
+# Binaries
+firebaseio-checker
+firebaseio-checker.exe
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output coverage files
+*.out
+*.prof
+
+# Output directory
+cfg/
+*.json
+
+# Go workspace file
+go.work
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
